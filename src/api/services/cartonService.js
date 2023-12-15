@@ -19,4 +19,23 @@ export const getCartonDetails = () =>{
 } ; 
 
 
+export const getCartonByID = (carton_id) =>{
+    try{
+        const fetchCartonByIdQuery = `select * from carton where carton_id = ${carton_id}`; 
+        db.query(fetchCartonByIdQuery , function(err , result){
+            if(err){
+                console.log("Error in fetchCartonByIdQuery !");
+            }
+            else{
+                 console.log(result); ; 
+            }
+        });
+    }
+    catch(err){
+        console.log("Error in getCartonByID !");
+    }
+    return `Sucessfully fetched carton Details with carton_id ${carton_id} ! ` ; 
+};
+
+
 
