@@ -24,9 +24,9 @@ export const  NewHeader = (orderDetails) =>{
 
 // to add  orderitem details to place order in order_items table  
 
-export const  NewItems = (orderDetails) =>{
+export const  NewItems = (orderDetails , order_id) =>{
     try{
-        const addOrderItemsQuery = `insert into order_items (ORDER_ID , PRODUCT_ID , PRODUCT_QUANTITY ) values (${orderDetails.ORDER_ID} ,${orderDetails.PRODUCT_ID} ,${orderDetails.PRODUCT_QUANTITY} ) ;  ` ; 
+        const addOrderItemsQuery = `insert into order_items (ORDER_ID , PRODUCT_ID , PRODUCT_QUANTITY ) values (${order_id} ,${orderDetails.PRODUCT_ID} ,${orderDetails.PRODUCT_QUANTITY} ) ;  ` ; 
         db.query(addOrderItemsQuery , function(err , result){
             if(err){
                 console.log("Error in creating addOrderItemsQuery");

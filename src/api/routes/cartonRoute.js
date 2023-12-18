@@ -1,10 +1,10 @@
 import express  from "express";
-import {getAllCartons, getCartonDetailsByID} from "../controllers/cartonController.js" ; 
+import * as cartonController from "../controllers/cartonController.js" ; 
 
 
 const router = express.Router() ; 
 
-router.get('/cartons' , getAllCartons) ; 
-router.get('/cartons/:carton_id' , getCartonDetailsByID) ; 
+router.get('/' , cartonController.getAllCartons) ; 
+router.get('/:carton_id' , cartonController.getCartonDetailsByID) ; 
 
 export default router ; 
