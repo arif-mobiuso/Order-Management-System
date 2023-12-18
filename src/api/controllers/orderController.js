@@ -10,7 +10,7 @@ export const addNewHeader =  async (req, res)  => {
 }
 
 
-export const addNewItems =  async (req, res)  => {
+export const addNewItemsById =  async (req, res)  => {
     const order_id = req.params.order_id ; 
     const orderDetails = req.body ; 
     const addItemsStatus  = orderService.NewItems(orderDetails , order_id ) ;
