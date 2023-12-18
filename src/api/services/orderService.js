@@ -13,12 +13,15 @@ export const  NewHeader = (orderDetails) =>{
             else{
                 console.log(result);
             }
-        })
+        });
+        return {
+            statusCode: 201, 
+            data: { message: "Sucessfully created new  Order Header!"  },
+          };
     }
     catch(err){
-        console.log("Error in Crating New Order Header!");
+        console.error("Error in Crating New Order Header : " , err);
     }
-    return "Sucessfully created new  Order Header!"  ;
 };
 
 
@@ -34,12 +37,15 @@ export const  NewItems = (orderDetails , order_id) =>{
             else{
                 console.log(result);
             }
-        })
+        });
+        return {
+            statusCode: 201, 
+            data: { message: "Sucessfully created new  Order Items!" },
+          };
     }
     catch(err){
-        console.log("Error in Crating New Order Items!");
+        console.error("Error in Crating New Order Items : " , err);
     }
-    return "Sucessfully created new  Order Items!"  ;
 };
 
 

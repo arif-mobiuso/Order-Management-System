@@ -13,13 +13,15 @@ export const  NewCustomer = (cutomerDetails) =>{
             else{
                 console.log(result);
             }
-        })
-
+        });
+        return {
+            statusCode: 201, 
+            data: { message: "Sucessfully created new Customer!"  },
+          };
     }
     catch(err){
-        console.log("Error in Crating New Cutomer!");
+        console.error("Error in Crating New Cutomer : " ,err);
     }
-    return "Sucessfully created new Customer!"  ;
 };
 
 
@@ -37,12 +39,15 @@ export const getCustomerDetails = () =>{
                 console.log(result);  ; 
             }
         });
+        return {
+            statusCode: 200, 
+            data: { message: "Sucessfully completed fecthing Customer Details! " },
+          };
     }
     catch(err){
-        console.log("Error in getCustomerDetails ");
+        console.error("Error in getCustomerDetails : " , err);
     }
 
-    return "Sucessfully completed fecthing Customer Details! "
 };
 
 
@@ -57,11 +62,14 @@ export const getCustomerById =(customer_id) =>{
                  console.log(result); ; 
             }
         });
+        return {
+            statusCode: 200, 
+            data: { message:  `Sucessfully fetched customer Details with customer_id ${customer_id} ! `},
+          };
     }
     catch(err){
-        console.log("Error in getCustomerById !");
+        console.error("Error in getCustomerById : " , err);
     }
-    return `Sucessfully fetched customer Details with customer_id ${customer_id} ! ` ; 
 };
 
 
@@ -75,10 +83,13 @@ export const orderHeaderById = (orderDetails , customer_id)=>{
             else{
                 console.log(result);
             }
-        })
+        });
+        return {
+            statusCode: 201, 
+            data: { message: "Sucessfully created new  Order Header!"  },
+          };
     }
     catch(err){
-        console.log("Error in Crating New Order Header in orderHeaderById!");
+        console.error("Error in Crating New Order Header in orderHeaderById : " , err);
     }
-    return "Sucessfully created new  Order Header!"  ;
 };
