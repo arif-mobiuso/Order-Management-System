@@ -5,7 +5,7 @@ import db from "../../config/databaseConfig.js" ;
 
 export const  NewHeader = (orderDetails) =>{
     try{
-        const addHeaderQuery = `insert into order_header (CUSTOMER_ID , ORDER_DATE , ORDER_STATUS , PAYMENT_MODE , PAYMENT_DATE , ORDER_SHIPMENT_DATE , SHIPPER_ID) values (${orderDetails.CUSTOMER_ID} ,${orderDetails.ORDER_DATE} ,"${orderDetails.ORDER_STATUS}" ,"${orderDetails.PAYMENT_MODE}" ,${orderDetails.PAYMENT_DATE} ,${orderDetails.ORDER_SHIPMENT_DATE} ,${orderDetails.SHIPPER_ID}) ;  ` ; 
+        const addHeaderQuery = `insert into order_header (CUSTOMER_ID , ORDER_DATE , ORDER_STATUS , PAYMENT_MODE , PAYMENT_DATE , ORDER_SHIPMENT_DATE , SHIPPER_ID) values (${orderDetails.CUSTOMER_ID} ,"${orderDetails.ORDER_DATE} ","${orderDetails.ORDER_STATUS}" ,"${orderDetails.PAYMENT_MODE}" ,"${orderDetails.PAYMENT_DATE} ","${orderDetails.ORDER_SHIPMENT_DATE}" ,${orderDetails.SHIPPER_ID}) ;  ` ; 
         db.query(addHeaderQuery , function(err , result){
             if(err){
                 console.log("Error in creating addHeaderQuery");
