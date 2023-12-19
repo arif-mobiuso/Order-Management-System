@@ -13,10 +13,9 @@ export const  baseURL ="/api/v1" ;
 app.use(express.json()) ; 
 
 // Routes
-app.use('/cartons', cartonRoute) ; 
-app.use('/customers', customerRoute) ; 
-// app.use('/orders', abc ,   orderRoute) ; 
-app.use('/orders', orderRoute) ; 
+app.use(`${baseURL}/cartons`, cartonRoute) ; 
+app.use(`${baseURL}/customers`, customerRoute) ; 
+app.use(`${baseURL}/orders`, orderRoute) ; 
 
 
 

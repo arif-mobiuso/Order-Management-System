@@ -7,9 +7,9 @@ const customerSchema = yup.object({
     CUSTOMER_EMAIL    : yup.string().email().required(),
     CUSTOMER_PHONE    : yup.string().matches(/^\d{10}$/, 'Invalid phone number').required(),
     CUSTOMER_CREATION_DATE : yup.date().default(() => new Date()) , 
-    ADDRESS_ID        : yup.number().required().positive().integer() ,
+    // ADDRESS_ID        : yup.number().required().positive().integer() ,
     CUSTOMER_USERNAME : yup.string().required(),
     CUSTOMER_GENDER   : yup.string().required()
 });
 
-export default customerSchema ; 
+export default customerSchema ;    
