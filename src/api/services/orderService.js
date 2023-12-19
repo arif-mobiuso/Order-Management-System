@@ -1,5 +1,6 @@
 import { error } from "console";
 import db from "../../config/databaseConfig.js" ; 
+import { resolve } from "path";
 
 
 // to add  header details to place order in order_header table  
@@ -84,5 +85,32 @@ export const placeOrder = (orderDetails , customer_id) =>{
         }
 
 
+    });
+};
+
+
+export const orderHeaderById = (order_id) =>{
+    return new Promise(async(resolve , reject)=>{
+        try{
+            const orderHeaderByIdQuery = `select * from order_header where order_id = ${order_id}` ;
+            db.query(orderHeaderByIdQuery , function(error ,result){
+                if(error){
+                    console.log("Error in orderHeaderById : " , error);
+                    reject(error);
+                }
+                else{
+                    console.log(result);
+                    resolve({
+                        statusCode : 200 , 
+                        data : { message : "Sucessfully fetched Order Header details !" , 
+                                result : result}
+                    });
+                }
+            });
+        }
+        catch(error){
+            console.log("Error in orderHeaderById : " , error);
+            reject(error);
+        }
     });
 };

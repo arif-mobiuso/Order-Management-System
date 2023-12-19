@@ -7,11 +7,14 @@ import * as customerController from "../controllers/customerController.js" ;
 import { validation } from "../middlewares/validationMiddleware.js";
 import customerSchema from "../validations/customerValidation.js";
 
-router.post('/'  ,  validation(customerSchema),  customerController.addNewCustomer) ; 
+// get 
 router.get('/' , customerController.getAllCustomers) ; 
 router.get('/:customer_id' , customerController.getCustomerDetailsById) ; 
-// router.post('/:customer_id/orders/headers' ,customerController.addOrderHeaderById ) ;
+
+// post
+router.post('/'  ,  validation(customerSchema),  customerController.addNewCustomer) ; 
 router.post('/:customer_id/orders' ,customerController.placeOrderById ) ;
+// router.post('/:customer_id/orders/headers' ,customerController.addOrderHeaderById ) ;
 
 export default router ; 
 
