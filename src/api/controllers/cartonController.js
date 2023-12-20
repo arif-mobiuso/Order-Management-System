@@ -26,4 +26,18 @@ export const getCartonDetailsByID = async (req, res) => {
 }
 
 
+export const removeCartonByID = async (req, res) => {
+     try {
+          const carton_id = req.params.carton_id;
+          const removeCartonByIDStatus = await cartonService.deleteCartonByID(carton_id);
+          return res.status(removeCartonByIDStatus.statusCode).send(removeCartonByIDStatus.data);
+     }
+     catch (error) {
+          console.error("Error in removeCartonByID:", error);
+          return res.status(500).send({ message: "Internal Server Error" });
+     }
+}
+
+
+
 

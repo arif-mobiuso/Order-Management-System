@@ -86,6 +86,33 @@ export const getCartonByID = (carton_id) => {
     });
 };
 
+export const deleteCartonByID = (carton_id) => {
+    return new Promise((resolve, reject) => {
+        try {
+            const deleteCartonByIDQuery = `delete from carton where carton_id = ${carton_id}`;
+            db.query(deleteCartonByIDQuery, function (err, result) {
+                if (err) {
+                    console.log("Error in deleteCartonByIDQuery", err);
+                    reject(err);
+                }
+                else {
+                        resolve({
+                            statusCode: 200,
+                            data: {
+                                message: `Sucessfully deleted  carton  with carton_id ${carton_id} ! `,
+                                result: result,
+                            },
+                        });
+                }
+            });
+        }
+        catch (err) {
+            console.error("Error in deleteCartonByID :", err);
+            reject(err);
+        }
+    });
+};
+
 
 
 

@@ -7,4 +7,6 @@ const router = express.Router() ;
 router.get('/' , cartonController.getAllCartons) ; 
 router.get('/:carton_id' , cartonController.getCartonDetailsByID) ; 
 
+router.delete('/:carton_id' , cartonController.removeCartonByID)
+
 export default router ; 
