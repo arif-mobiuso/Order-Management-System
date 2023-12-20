@@ -93,6 +93,40 @@ export const getCustomerById =(customer_id) =>{
 };
 
 
+export const deleteCustomerByID = (customer_id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const deleteCustomerByIdQuery = `delete from online_customer where customer_id = ${customer_id}`;
+            db.query(deleteCustomerByIdQuery, async function (err, result) {
+                if (err) {
+                    console.log("Error in deleteCustomerByIdQuery", err);
+                    reject(err);
+                }
+                else {
+                        if(result.affectedRows == 0){
+                            resolve({
+                                statusCode:404 , 
+                                data : {message: "Customer not found - cannot delete !"}
+                            });
+                        }
+                        else{
+                            resolve({
+                                statusCode: 200,
+                                data: {
+                                    message: `Sucessfully deleted  Customer  with customer_id ${customer_id} ! `,
+                                    result: result,
+                                },
+                            });
+                        }
+                }
+            });
+        }
+        catch (err) {
+            console.error("Error in deleteCustomerByID :", err);
+            reject(err);
+        }
+    });
+};
 
 
 // export const orderHeaderById = (orderDetails , customer_id)=>{

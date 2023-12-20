@@ -7,6 +7,7 @@ import * as customerController from "../controllers/customerController.js" ;
 import { validation } from "../middlewares/validationMiddleware.js";
 import customerSchema from "../validations/customerValidation.js";
 import placeOrderSchema from "../validations/placeOrderValidation.js";
+import e from "express";
 
 // get 
 router.get('/' , customerController.getAllCustomers) ; 
@@ -16,6 +17,9 @@ router.get('/:customer_id' , customerController.getCustomerDetailsById) ;
 router.post('/'  , validation(customerSchema)  ,  customerController.addNewCustomer) ; 
 router.post('/:customer_id/orders',validation(placeOrderSchema) ,customerController.placeOrderById ) ;
 // router.post('/:customer_id/orders/headers' ,customerController.addOrderHeaderById ) ;
+
+// delete
+router.delete('/:customer_id' ,customerController.removeCustomerByID);
 
 export default router ; 
 

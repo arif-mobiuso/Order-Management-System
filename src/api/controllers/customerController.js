@@ -57,6 +57,18 @@ export const placeOrderById = async (req, res) =>{
      }
 };
 
+export const removeCustomerByID = async (req, res) => {
+     try {
+          const customer_id = req.params.customer_id;
+          const removeCustomerByIDStatus = await customerService.deleteCustomerByID(customer_id);
+          return res.status(removeCustomerByIDStatus.statusCode).send(removeCustomerByIDStatus.data);
+     }
+     catch (error) {
+          console.error("Error in removeCustomerByID:", error);
+          return res.status(500).send({ message: "Internal Server Error" });
+     }
+}
+
 
 
 // export const addOrderHeaderById = async (req, res) =>{
