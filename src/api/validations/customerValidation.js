@@ -2,14 +2,20 @@ import yup from "yup" ;
 
 const customerSchema = yup.object({
 
-    CUSTOMER_FNAME    : yup.string().required(),
-    CUSTOMER_LNAME    : yup.string().required(),
-    CUSTOMER_EMAIL    : yup.string().email().required(),
-    CUSTOMER_PHONE    : yup.string().matches(/^\d{10}$/, 'Invalid phone number').required(),
-    CUSTOMER_CREATION_DATE : yup.date().default(() => new Date()) , 
+    firstName    : yup.string().required(),
+    lastName    : yup.string().required(),
+    email    : yup.string().email().required(),
+    phone    : yup.string().matches(/^\d{10}$/, 'Invalid phone number').required(),
+    addressLine1 : yup.string().required(),
+    addressLine2 : yup.string().required(),
+    city : yup.string().required(),
+    state : yup.string().required(),
+    pincode : yup.number().required(),
+    country : yup.string().required(),
+    userName : yup.string().required(),
+    gender   : yup.string().required()
+    // CUSTOMER_CREATION_DATE : yup.date().default(() => new Date()) , 
     // ADDRESS_ID        : yup.number().required().positive().integer() ,
-    CUSTOMER_USERNAME : yup.string().required(),
-    CUSTOMER_GENDER   : yup.string().required()
 });
 
 export default customerSchema ;    
