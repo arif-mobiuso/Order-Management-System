@@ -3,6 +3,7 @@ import express  from "express";
 import cartonRoute from "./api/routes/cartonRoute.js" ; 
 import customerRoute from "./api/routes/customerRoute.js" ; 
 import orderRoute from "./api/routes/orderRoute.js" ; 
+import addressRoute from "./api/routes/addressRoute.js"
 
 //  creating express server 
 const app = express() ; 
@@ -16,6 +17,8 @@ app.use(express.json()) ;
 app.use(`${baseURL}/cartons`, cartonRoute) ; 
 app.use(`${baseURL}/customers`, customerRoute) ; 
 app.use(`${baseURL}/orders`, orderRoute) ; 
+app.use(`${baseURL}/addresses`, addressRoute) ; 
+
 
 
 

@@ -12,7 +12,7 @@ router.get('/' , customerController.getAllCustomers) ;
 router.get('/:customer_id' , customerController.getCustomerDetailsById) ; 
 
 // post
-router.post('/'  ,  validation(customerSchema),  customerController.addNewCustomer) ; 
+router.post('/'  ,   customerController.addNewCustomer) ; 
 router.post('/:customer_id/orders' ,customerController.placeOrderById ) ;
 // router.post('/:customer_id/orders/headers' ,customerController.addOrderHeaderById ) ;
 

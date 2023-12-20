@@ -9,8 +9,8 @@ export const  NewCustomer = async (cutomerDetails) =>{
         try{
             const currentDate = new Date() ; 
             const customerCreationDate = `${currentDate.getFullYear()}-${currentDate.getMonth()+1}-${currentDate.getDate()}` ;            
-            const addressId =  await addressService.addCustomerAddress(cutomerDetails); 
-            const addCustomerQuery = `insert into online_customer  (customer_fname ,customer_lname  , customer_email , customer_phone , address_id , customer_creation_date , customer_username , customer_gender ) values ("${cutomerDetails.CUSTOMER_FNAME}" ,"${cutomerDetails.CUSTOMER_LNAME}" ,"${cutomerDetails.CUSTOMER_EMAIL}" ,${cutomerDetails.CUSTOMER_PHONE} ,${addressId.addressId} ,'${customerCreationDate}' ,"${cutomerDetails.CUSTOMER_USERNAME} ","${cutomerDetails.CUSTOMER_GENDER}" ) ; ` ; 
+            const addAddressIdResult =  await addressService.addCustomerAddress(cutomerDetails); 
+            const addCustomerQuery = `insert into online_customer  (customer_fname ,customer_lname  , customer_email , customer_phone , address_id , customer_creation_date , customer_username , customer_gender ) values ("${cutomerDetails.firstName}" ,"${cutomerDetails.lastName}" ,"${cutomerDetails.email}" ,${cutomerDetails.phone} ,${addAddressIdResult.addressId} ,'${customerCreationDate}' ,"${cutomerDetails.userName} ","${cutomerDetails.gender}" ) ; ` ; 
             db.query(addCustomerQuery , function(error, result){
                 if(error){
                     console.log("Error in creating addCustomerQuery" , error);

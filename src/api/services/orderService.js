@@ -32,7 +32,7 @@ export const  NewHeader = (orderDetails) =>{
 export const  NewItems = (orderDetails , order_id) =>{
     return new Promise(async (resolve , reject)=>{
         try{
-            const addOrderItemsQuery = `insert into order_items (ORDER_ID , PRODUCT_ID , PRODUCT_QUANTITY ) values (${order_id} ,${orderDetails.PRODUCT_ID} ,${orderDetails.PRODUCT_QUANTITY} ) ;  ` ; 
+            const addOrderItemsQuery = `insert into order_items (ORDER_ID , PRODUCT_ID , PRODUCT_QUANTITY ) values (${order_id} ,${orderDetails.productId} ,${orderDetails.productQuantity} ) ;  ` ; 
             db.query(addOrderItemsQuery , function(error, result){
                 if(error){
                 console.log("Error in creating addOrderItemsQuery" ,error);
@@ -59,7 +59,7 @@ export const  NewItems = (orderDetails , order_id) =>{
 export const placeOrder = (orderDetails , customer_id) =>{
     return new Promise(async (resolve , reject)=>{
         try{
-            const addHeaderQuery = `insert into order_header (CUSTOMER_ID , ORDER_DATE , ORDER_STATUS , PAYMENT_MODE , PAYMENT_DATE , ORDER_SHIPMENT_DATE , SHIPPER_ID) values (${customer_id} ,"${orderDetails.ORDER_DATE} ","${orderDetails.ORDER_STATUS}" ,"${orderDetails.PAYMENT_MODE}" ,"${orderDetails.PAYMENT_DATE} ","${orderDetails.ORDER_SHIPMENT_DATE}" ,${orderDetails.SHIPPER_ID}) ;  ` ; 
+            const addHeaderQuery = `insert into order_header (CUSTOMER_ID , ORDER_DATE , ORDER_STATUS , PAYMENT_MODE , PAYMENT_DATE , ORDER_SHIPMENT_DATE , SHIPPER_ID) values (${customer_id} ,"${orderDetails.orderDate} ","${orderDetails.orderStatus}" ,"${orderDetails.paymentMode}" ,"${orderDetails.paymentDate} ","${orderDetails.shipmentDate}" ,${orderDetails.shipperId}) ;  ` ; 
 
             db.query(addHeaderQuery , function(error , result){
                 if(error){

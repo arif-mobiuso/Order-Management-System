@@ -12,7 +12,7 @@ import orderItemsSchema from "../validations/orderItemsValidation.js";
 // creating an order header
 router.post('/headers', validation(orderHeaderSchema),  orderController.addNewHeader) ; 
 // add order_items in a particular order
-router.post('/:order_id/items' , validation(orderItemsSchema)  , orderController.addNewItemsById) ; 
+router.post('/:order_id/items' , orderController.addNewItemsById) ; 
 
 router.get('/:order_id/headers', orderController.getOrderHeaderById) ;
 router.get('/:order_id/items', orderController.getOrderItemsById) ;
