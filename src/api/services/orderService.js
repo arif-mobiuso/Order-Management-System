@@ -43,7 +43,7 @@ export const  NewItems = (orderDetails , order_id) =>{
                 resolve({
                     statusCode: 201, 
                     data: { message: "Sucessfully added Order Items!" ,
-                            result : result },
+                            result : result }
                 });
             }
         });
@@ -110,6 +110,34 @@ export const orderHeaderById = (order_id) =>{
         }
         catch(error){
             console.log("Error in orderHeaderById : " , error);
+            reject(error);
+        }
+    });
+};
+
+
+
+export const orderItemsById = (order_id) =>{
+    return new Promise(async(resolve , reject)=>{
+        try{
+            const orderItemsByIdQuery = `select * from order_items where order_id = ${order_id}` ;
+            db.query(orderItemsByIdQuery , function(error ,result){
+                if(error){
+                    console.log("Error in orderItemsById : " , error);
+                    reject(error);
+                }
+                else{
+                    console.log(result);
+                    resolve({
+                        statusCode : 200 , 
+                        data : { message : "Sucessfully fetched Order Items details !" , 
+                                result : result}
+                    });
+                }
+            });
+        }
+        catch(error){
+            console.log("Error in orderItemsById : " , error);
             reject(error);
         }
     });

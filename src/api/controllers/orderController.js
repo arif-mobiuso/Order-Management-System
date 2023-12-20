@@ -13,21 +13,23 @@ export const addNewHeader =  async (req, res)  => {
          console.error("Error in addNewHeader:", error);
          return res.status(500).send({ message: "Internal Server Error" });
     }
-}
+};
+
 
 
 export const addNewItemsById =  async (req, res)  => {
     try{
     const order_id = req.params.order_id ; 
     const orderDetails = req.body ; 
-    const addItemsStatus  = orderService.NewItems(orderDetails , order_id ) ;
+    const addItemsStatus  = await orderService.NewItems(orderDetails , order_id ) ;
     return res.status(addItemsStatus.statusCode).send(addItemsStatus.data) ; 
     }
     catch(error){
          console.error("Error in addNewItemsById:", error);
          return res.status(500).send({ message: "Internal Server Error" });
     }
-}
+};
+
 
 
 export const getOrderHeaderById = async(req, res) =>{
@@ -41,3 +43,18 @@ export const getOrderHeaderById = async(req, res) =>{
         return res.status(500).send({ message: "Internal Server Error" });
     }
 }
+
+
+export const getOrderItemsById = async(req, res) =>{
+    try{
+        const order_id = req.params.order_id ;
+        const getOrderItemsByIdStatus = await orderService.orderItemsById(order_id);
+        return res.status(getOrderItemsByIdStatus.statusCode).send(getOrderItemsByIdStatus.data);
+    }
+    catch(error){
+        console.log("Error in getOrderItemsById : " , error );
+        return res.status(500).send({ message: "Internal Server Error" });
+    }
+}
+
+
