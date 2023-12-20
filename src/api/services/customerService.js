@@ -32,8 +32,6 @@ export const  NewCustomer = async (cutomerDetails) =>{
 }) ;
 };
 
-
-
 // To fetch all customer details from online_customer table 
 export const getCustomerDetails = () =>{
     return new Promise(async(resolve , reject) =>{
@@ -74,12 +72,16 @@ export const getCustomerById =(customer_id) =>{
                     reject(error);
                 }
                 else{
-                    console.log(result); 
-                    resolve({
-                        statusCode: 200, 
-                        data: { message:  `Sucessfully fetched customer Details with customer_id ${customer_id} ! ` , 
-                                result : result}
-                    }); 
+                    console.log(result);
+                    if(result.length == 0){
+                        resolve ({statusCode : 404 , data:{message : "Customer not found !"}});
+                    } else{
+                        resolve({
+                            statusCode: 200, 
+                            data: { message:  `Sucessfully fetched customer Details with customer_id ${customer_id} ! ` , 
+                            result : result}
+                        }); 
+                    }
             }
         });
     }

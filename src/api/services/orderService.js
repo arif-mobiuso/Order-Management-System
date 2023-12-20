@@ -100,11 +100,16 @@ export const orderHeaderById = (order_id) =>{
                 }
                 else{
                     console.log(result);
-                    resolve({
-                        statusCode : 200 , 
-                        data : { message : "Sucessfully fetched Order Header details !" , 
-                                result : result}
-                    });
+                    if (result.length == 0) {
+                        resolve ({statusCode : 404 , data:{message : "Header not found !"}});
+                    }
+                    else {
+                        resolve({
+                            statusCode : 200 , 
+                            data : { message : "Sucessfully fetched Order Header details !" , 
+                            result : result}
+                        });
+                    }
                 }
             });
         }
@@ -128,11 +133,16 @@ export const orderItemsById = (order_id) =>{
                 }
                 else{
                     console.log(result);
-                    resolve({
-                        statusCode : 200 , 
-                        data : { message : "Sucessfully fetched Order Items details !" , 
-                                result : result}
-                    });
+                    if (result.length == 0) {
+                        resolve ({statusCode : 404 , data:{message : "Order Items not found !"}});
+                    }
+                    else {
+                        resolve({
+                            statusCode : 200 , 
+                            data : { message : "Sucessfully fetched Order Items details !" , 
+                            result : result}
+                        });
+                    }
                 }
             });
         }

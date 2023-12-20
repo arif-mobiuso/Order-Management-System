@@ -63,29 +63,28 @@ export const getCartonByID = (carton_id) => {
                     reject(err);
                 }
                 else {
-                    const obj = result;
                     console.log(result);
-                    resolve({
-                        statusCode: 200,
-                        data: {
-                            message: `Sucessfully fetched carton Details with carton_id ${carton_id} ! `,
-                            result: obj,
-                        },
-                    });
+                    if (result.length == 0) {
+                        resolve ({statusCode : 404 , data:{message : "Carton not found !"}});
+                    }
+                    else {
+                        resolve({
+                            statusCode: 200,
+                            data: {
+                                message: `Sucessfully fetched carton Details with carton_id ${carton_id} ! `,
+                                result: result,
+                            },
+                        });
+                    }
                 }
             });
         }
         catch (err) {
             console.error("Error in getCartonByID :", err);
-            reject(err) ; 
+            reject(err);
         }
     });
 };
-
-// return new Promise((resolve, reject) => {
-
-// });
-
 
 
 

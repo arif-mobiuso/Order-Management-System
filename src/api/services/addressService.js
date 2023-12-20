@@ -55,7 +55,6 @@ export const getAddressDetails = async () => {
     });
 };
 
-
 export const getAddressDetailsById = async (address_id) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -67,13 +66,18 @@ export const getAddressDetailsById = async (address_id) => {
                 }
                 else {
                     console.log(result);
-                    resolve({
-                        statusCode: 200,
-                        data: {
-                            message: `Sucessfully Fetched Address Details for address_id = ${address_id} !`,
-                            result: result
-                        }
-                    });
+                    if (result.length == 0) {
+                        resolve({ statusCode: 404, data: { message: "Address not found !" } });
+                    }
+                    else {
+                        resolve({
+                            statusCode: 200,
+                            data: {
+                                message: `Sucessfully Fetched Address Details for address_id = ${address_id} !`,
+                                result: result
+                            }
+                        });
+                    }
                 }
             });
         }
