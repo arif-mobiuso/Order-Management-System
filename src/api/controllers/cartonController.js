@@ -38,6 +38,18 @@ export const removeCartonByID = async (req, res) => {
      }
 }
 
+export const addNewCarton = async (req, res) => {
+     try {
+          const cartonDetails = req.body;
+          const addNewCartonStatus = await cartonService.newCarton(cartonDetails);
+          return res.status(addNewCartonStatus.statusCode).send(addNewCartonStatus.data);
+     }
+     catch (error) {
+          console.error("Error in addNewCarton:", error);
+          return res.status(500).send({ message: "Internal Server Error" });
+     }
+}
+
 
 
 
