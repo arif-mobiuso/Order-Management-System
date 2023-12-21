@@ -1,9 +1,9 @@
 import db from "../../config/databaseConfig.js";
 
-
+import {transformCartonDetails} from "../helpers/utilities.js" 
 
 export const getCartonDetails = () => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async(resolve, reject) => {
         try {
             const fetchCartonsQuery = `select * from carton`;
             db.query(fetchCartonsQuery, function (error, result) {
@@ -11,13 +11,12 @@ export const getCartonDetails = () => {
                     console.log("Error in fetchCartonsQuery", error);
                     reject(error);
                 } else {
-                    const obj = result;
                     console.log(result);
                     resolve({
                         statusCode: 200,
-                        data: {
+                        status: {
                             message: "Successfully completed fetching carton Details!",
-                            result: obj,
+                            result: result.map(transformCartonDetails),
                         },
                     });
                 }
@@ -34,7 +33,7 @@ export const getCartonDetails = () => {
 export const getCartonById = async(cartonId) => {
     return new Promise(async(resolve, reject) => {
         try {
-            const fetchCartonByIdQuery = `select * from carton where cartonId = ${cartonId}`;
+            const fetchCartonByIdQuery = `select * from carton where carton_id = ${cartonId}`;
             db.query(fetchCartonByIdQuery, function (err, result) {
                 if (err) {
                     console.log("Error in fetchCartonByIdQuery", err);
@@ -50,7 +49,7 @@ export const getCartonById = async(cartonId) => {
                             statusCode: 200,
                             status: {
                                 message: `Sucessfully fetched carton Details with cartonId ${cartonId} ! `,
-                                result: result,
+                                result: result.map(transformCartonDetails),
                             },
                         });
                     }
