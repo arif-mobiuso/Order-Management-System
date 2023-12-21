@@ -42,8 +42,7 @@ export const  NewItems = (orderDetails , orderId) =>{
                 console.log(result);
                 resolve({
                     statusCode: 201, 
-                    status: { message: "Sucessfully added Order Items!" ,
-                            result : result }
+                    status: { message: "Sucessfully added Order Items!"  }
                 });
             }
         });
@@ -59,8 +58,9 @@ export const  NewItems = (orderDetails , orderId) =>{
 export const placeOrder = (orderDetails , customerId) =>{
     return new Promise(async (resolve , reject)=>{
         try{
-            const addHeaderQuery = `insert into order_header (CUSTOMER_ID , ORDER_DATE , ORDER_STATUS , PAYMENT_MODE , PAYMENT_DATE , ORDER_SHIPMENT_DATE , SHIPPER_ID) values (${customerId} ,"${orderDetails.orderDate} ","${orderDetails.orderStatus}" ,"${orderDetails.paymentMode}" ,"${orderDetails.paymentDate} ","${orderDetails.shipmentDate}" ,${orderDetails.shipperId}) ;  ` ; 
-
+            const currentDate = new Date() ; 
+            const orderDate = `${currentDate.getFullYear()}-${currentDate.getMonth()+1}-${currentDate.getDate()}` ;   
+            const addHeaderQuery = `insert into order_header (CUSTOMER_ID , ORDER_DATE , PAYMENT_MODE ) values (${customerId} ,"${orderDate} ", "${orderDetails.paymentMode}") ;  ` ; 
             db.query(addHeaderQuery , function(error , result){
                 if(error){
                     console.log("Error in addHeaderQuery !");
