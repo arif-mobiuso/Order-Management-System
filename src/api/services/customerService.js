@@ -1,6 +1,6 @@
 import db from "../../config/databaseConfig.js" ; 
 import * as addressService  from "./addressService.js";
-
+import { transformCustomerDetails } from "../helpers/utilities.js";
 
 // to add new customer to online_customer table
 export const  NewCustomer = async (cutomerDetails) =>{
@@ -42,12 +42,11 @@ export const getCustomerDetails = () =>{
                     reject(error);  
                 }
                 else{
-                    console.log(result); 
                     resolve({
                         statusCode:200 , 
                         status : {
                             message:"Sucessfully  fecthed Customer Details! " ,
-                            result:result , 
+                            result:result.map(transformCustomerDetails) , 
                         }
                     });
                 }
@@ -71,14 +70,13 @@ export const getCustomerById =(customerId) =>{
                     reject(error);
                 }
                 else{
-                    console.log(result);
                     if(result.length == 0){
                         resolve ({statusCode : 404 , status:{message : "Customer not found !"}});
                     } else{
                         resolve({
                             statusCode: 200, 
                             status: { message:  `Sucessfully fetched customer Details with customerId ${customerId} ! ` , 
-                            result : result}
+                            result : result.map(transformCustomerDetails)}
                         }); 
                     }
             }
