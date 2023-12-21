@@ -19,9 +19,9 @@ export const addNewHeader =  async (req, res)  => {
 
 export const addNewItemsById =  async (req, res)  => {
     try{
-    const order_id = req.params.order_id ; 
+    const orderId = req.params.id ; 
     const orderDetails = req.body ; 
-    const addItemsStatus  = await orderService.NewItems(orderDetails , order_id ) ;
+    const addItemsStatus  = await orderService.NewItems(orderDetails , orderId ) ;
     return res.status(addItemsStatus.statusCode).send(addItemsStatus.data) ; 
     }
     catch(error){
@@ -34,8 +34,8 @@ export const addNewItemsById =  async (req, res)  => {
 
 export const getOrderHeaderById = async(req, res) =>{
     try{
-        const order_id = req.params.order_id ;
-        const getOrderHeaderByIdStatus = await orderService.orderHeaderById(order_id);
+        const orderId = req.params.id ;
+        const getOrderHeaderByIdStatus = await orderService.orderHeaderById(orderId);
         return res.status(getOrderHeaderByIdStatus.statusCode).send(getOrderHeaderByIdStatus.data);
     }
     catch(error){
@@ -47,8 +47,8 @@ export const getOrderHeaderById = async(req, res) =>{
 
 export const getOrderItemsById = async(req, res) =>{
     try{
-        const order_id = req.params.order_id ;
-        const getOrderItemsByIdStatus = await orderService.orderItemsById(order_id);
+        const orderId = req.params.id ;
+        const getOrderItemsByIdStatus = await orderService.orderItemsById(orderId);
         return res.status(getOrderItemsByIdStatus.statusCode).send(getOrderItemsByIdStatus.data);
     }
     catch(error){

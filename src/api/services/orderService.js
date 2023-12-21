@@ -29,10 +29,10 @@ export const  NewHeader = (orderDetails) =>{
 
 // to add  orderitem details to place order in order_items table  
 
-export const  NewItems = (orderDetails , order_id) =>{
+export const  NewItems = (orderDetails , orderId) =>{
     return new Promise(async (resolve , reject)=>{
         try{
-            const addOrderItemsQuery = `insert into order_items (ORDER_ID , PRODUCT_ID , PRODUCT_QUANTITY ) values (${order_id} ,${orderDetails.productId} ,${orderDetails.productQuantity} ) ;  ` ; 
+            const addOrderItemsQuery = `insert into order_items (ORDER_ID , PRODUCT_ID , PRODUCT_QUANTITY ) values (${orderId} ,${orderDetails.productId} ,${orderDetails.productQuantity} ) ;  ` ; 
             db.query(addOrderItemsQuery , function(error, result){
                 if(error){
                 console.log("Error in creating addOrderItemsQuery" ,error);
@@ -56,10 +56,10 @@ export const  NewItems = (orderDetails , order_id) =>{
 };
 
 
-export const placeOrder = (orderDetails , customer_id) =>{
+export const placeOrder = (orderDetails , customerId) =>{
     return new Promise(async (resolve , reject)=>{
         try{
-            const addHeaderQuery = `insert into order_header (CUSTOMER_ID , ORDER_DATE , ORDER_STATUS , PAYMENT_MODE , PAYMENT_DATE , ORDER_SHIPMENT_DATE , SHIPPER_ID) values (${customer_id} ,"${orderDetails.orderDate} ","${orderDetails.orderStatus}" ,"${orderDetails.paymentMode}" ,"${orderDetails.paymentDate} ","${orderDetails.shipmentDate}" ,${orderDetails.shipperId}) ;  ` ; 
+            const addHeaderQuery = `insert into order_header (CUSTOMER_ID , ORDER_DATE , ORDER_STATUS , PAYMENT_MODE , PAYMENT_DATE , ORDER_SHIPMENT_DATE , SHIPPER_ID) values (${customerId} ,"${orderDetails.orderDate} ","${orderDetails.orderStatus}" ,"${orderDetails.paymentMode}" ,"${orderDetails.paymentDate} ","${orderDetails.shipmentDate}" ,${orderDetails.shipperId}) ;  ` ; 
 
             db.query(addHeaderQuery , function(error , result){
                 if(error){
@@ -72,7 +72,6 @@ export const placeOrder = (orderDetails , customer_id) =>{
                         statusCode : 201 , 
                         data : {
                             message : "New Order Created !" ,
-                            result : result ,
                             orderId :  result.insertId
                         }
                     });
@@ -83,16 +82,14 @@ export const placeOrder = (orderDetails , customer_id) =>{
             console.log("Error in placing order : " , error);
             reject(error);
         }
-
-
     });
 };
 
 
-export const orderHeaderById = (order_id) =>{
+export const orderHeaderById = (customerId) =>{
     return new Promise(async(resolve , reject)=>{
         try{
-            const orderHeaderByIdQuery = `select * from order_header where order_id = ${order_id}` ;
+            const orderHeaderByIdQuery = `select * from order_header where order_id = ${customerId}` ;
             db.query(orderHeaderByIdQuery , function(error ,result){
                 if(error){
                     console.log("Error in orderHeaderById : " , error);
@@ -122,10 +119,10 @@ export const orderHeaderById = (order_id) =>{
 
 
 
-export const orderItemsById = (order_id) =>{
+export const orderItemsById = (customerId) =>{
     return new Promise(async(resolve , reject)=>{
         try{
-            const orderItemsByIdQuery = `select * from order_items where order_id = ${order_id}` ;
+            const orderItemsByIdQuery = `select * from order_items where order_id = ${customerId}` ;
             db.query(orderItemsByIdQuery , function(error ,result){
                 if(error){
                     console.log("Error in orderItemsById : " , error);

@@ -15,9 +15,9 @@ router.post('/headers',   orderController.addNewHeader) ;
 
 
 
-router.get('/:order_id/headers', orderController.getOrderHeaderById) ;
-router.get('/:order_id/items', orderController.getOrderItemsById) ;
-router.post('/:order_id/items' , validation(orderItemsSchema) , orderController.addNewItemsById) ; 
+router.get('/:id/headers', orderController.getOrderHeaderById) ;
+router.get('/:id/items', orderController.getOrderItemsById) ;
+router.post('/:id/items' , validation(orderItemsSchema) , orderController.addNewItemsById) ; 
 
 
 
