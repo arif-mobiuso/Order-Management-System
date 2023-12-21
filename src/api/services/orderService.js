@@ -18,7 +18,7 @@ export const  NewHeader = (orderDetails) =>{
         });
         return {
             statusCode: 201, 
-            data: { message: "Sucessfully created new  Order Header!"  },
+            status: { message: "Sucessfully created new  Order Header!"  },
           };
     }
     catch(err){
@@ -42,7 +42,7 @@ export const  NewItems = (orderDetails , orderId) =>{
                 console.log(result);
                 resolve({
                     statusCode: 201, 
-                    data: { message: "Sucessfully added Order Items!" ,
+                    status: { message: "Sucessfully added Order Items!" ,
                             result : result }
                 });
             }
@@ -70,7 +70,7 @@ export const placeOrder = (orderDetails , customerId) =>{
                     console.log(result);
                     resolve({
                         statusCode : 201 , 
-                        data : {
+                        status : {
                             message : "New Order Created !" ,
                             orderId :  result.insertId
                         }
@@ -98,12 +98,12 @@ export const orderHeaderById = (customerId) =>{
                 else{
                     console.log(result);
                     if (result.length == 0) {
-                        resolve ({statusCode : 404 , data:{message : "Header not found !"}});
+                        resolve ({statusCode : 404 , status:{message : "Header not found !"}});
                     }
                     else {
                         resolve({
                             statusCode : 200 , 
-                            data : { message : "Sucessfully fetched Order Header details !" , 
+                            status : { message : "Sucessfully fetched Order Header details !" , 
                             result : result}
                         });
                     }
@@ -131,12 +131,12 @@ export const orderItemsById = (customerId) =>{
                 else{
                     console.log(result);
                     if (result.length == 0) {
-                        resolve ({statusCode : 404 , data:{message : "Order Items not found !"}});
+                        resolve ({statusCode : 404 , status:{message : "Order Items not found !"}});
                     }
                     else {
                         resolve({
                             statusCode : 200 , 
-                            data : { message : "Sucessfully fetched Order Items details !" , 
+                            status : { message : "Sucessfully fetched Order Items details !" , 
                             result : result}
                         });
                     }

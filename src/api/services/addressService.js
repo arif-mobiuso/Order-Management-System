@@ -15,7 +15,6 @@ export const addCustomerAddress = async (addressDetails) => {
                     console.log(result);
                     resolve({
                         addressId: result.insertId
-                        // addressId : 100
                     });
                 }
             });
@@ -40,7 +39,7 @@ export const getAddressDetails = async () => {
                     console.log(result);
                     resolve({
                         statusCode: 200,
-                        data: {
+                        status: {
                             message: "Sucessfully Fetched all Address Details !",
                             result: result
                         }
@@ -68,12 +67,12 @@ export const getAddressDetailsById = async (addressId) => {
                 else {
                     console.log(result);
                     if (result.length == 0) {
-                        resolve({ statusCode: 404, data: { message: "Address not found !" } });
+                        resolve({ statusCode: 404, status: { message: "Address not found !" } });
                     }
                     else {
                         resolve({
                             statusCode: 200,
-                            data: {
+                            status: {
                                 message: `Sucessfully Fetched Address Details for addressId = ${addressId} !`,
                                 result: result
                             }

@@ -7,7 +7,7 @@ export const addNewHeader =  async (req, res)  => {
     try{
     const orderDetails = req.body ; 
     const headerStatus  =  orderService.NewHeader(orderDetails ) ;
-    return res.status(headerStatus.statusCode).send(headerStatus.data) ; 
+    return res.status(headerStatus.statusCode).send(headerStatus.status) ; 
     }
     catch(error){
          console.error("Error in addNewHeader:", error);
@@ -22,7 +22,7 @@ export const addNewItemsById =  async (req, res)  => {
     const orderId = req.params.id ; 
     const orderDetails = req.body ; 
     const addItemsStatus  = await orderService.NewItems(orderDetails , orderId ) ;
-    return res.status(addItemsStatus.statusCode).send(addItemsStatus.data) ; 
+    return res.status(addItemsStatus.statusCode).send(addItemsStatus.status) ; 
     }
     catch(error){
          console.error("Error in addNewItemsById:", error);
@@ -36,7 +36,7 @@ export const getOrderHeaderById = async(req, res) =>{
     try{
         const orderId = req.params.id ;
         const getOrderHeaderByIdStatus = await orderService.orderHeaderById(orderId);
-        return res.status(getOrderHeaderByIdStatus.statusCode).send(getOrderHeaderByIdStatus.data);
+        return res.status(getOrderHeaderByIdStatus.statusCode).send(getOrderHeaderByIdStatus.status);
     }
     catch(error){
         console.log("Error in getOrderHeaderById : " , error );
@@ -49,7 +49,7 @@ export const getOrderItemsById = async(req, res) =>{
     try{
         const orderId = req.params.id ;
         const getOrderItemsByIdStatus = await orderService.orderItemsById(orderId);
-        return res.status(getOrderItemsByIdStatus.statusCode).send(getOrderItemsByIdStatus.data);
+        return res.status(getOrderItemsByIdStatus.statusCode).send(getOrderItemsByIdStatus.status);
     }
     catch(error){
         console.log("Error in getOrderItemsById : " , error );

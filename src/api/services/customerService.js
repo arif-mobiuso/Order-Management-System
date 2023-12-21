@@ -19,7 +19,7 @@ export const  NewCustomer = async (cutomerDetails) =>{
                 console.log(result);
                 resolve({
                     statusCode: 201, 
-                    data: { message: "Sucessfully created new Customer!" ,
+                    status: { message: "Sucessfully created new Customer!" ,
                             customerId : result.insertId} 
                 });
             }
@@ -45,7 +45,7 @@ export const getCustomerDetails = () =>{
                     console.log(result); 
                     resolve({
                         statusCode:200 , 
-                        data : {
+                        status : {
                             message:"Sucessfully  fecthed Customer Details! " ,
                             result:result , 
                         }
@@ -73,11 +73,11 @@ export const getCustomerById =(customerId) =>{
                 else{
                     console.log(result);
                     if(result.length == 0){
-                        resolve ({statusCode : 404 , data:{message : "Customer not found !"}});
+                        resolve ({statusCode : 404 , status:{message : "Customer not found !"}});
                     } else{
                         resolve({
                             statusCode: 200, 
-                            data: { message:  `Sucessfully fetched customer Details with customerId ${customerId} ! ` , 
+                            status: { message:  `Sucessfully fetched customer Details with customerId ${customerId} ! ` , 
                             result : result}
                         }); 
                     }
@@ -105,13 +105,13 @@ export const deleteCustomerById = (customerId) => {
                         if(result.affectedRows == 0){
                             resolve({
                                 statusCode:404 , 
-                                data : {message: "Customer not found - cannot delete !"}
+                                status : {message: "Customer not found - cannot delete !"}
                             });
                         }
                         else{
                             resolve({
                                 statusCode: 200,
-                                data: {
+                                status: {
                                     message: `Sucessfully deleted  Customer  with customerId ${customerId} ! `,
                                 },
                             });
@@ -127,23 +127,3 @@ export const deleteCustomerById = (customerId) => {
 };
 
 
-// export const orderHeaderById = (orderDetails , customerId)=>{
-//     try{
-//         const addHeaderByIdQuery = `insert into order_header (CUSTOMERId , ORDER_DATE , ORDER_STATUS , PAYMENT_MODE , PAYMENT_DATE , ORDER_SHIPMENT_DATE , SHIPPER_Id) values (${customerId} ,${orderDetails.ORDER_DATE} ,"${orderDetails.ORDER_STATUS}" ,"${orderDetails.PAYMENT_MODE}" ,${orderDetails.PAYMENT_DATE} ,${orderDetails.ORDER_SHIPMENT_DATE} ,${orderDetails.SHIPPER_Id}) ;  ` ; 
-//         db.query(addHeaderByIdQuery , function(err , result){
-//             if(err){
-//                 console.log("Error in creating addHeaderByIdQuery");
-//             }
-//             else{
-//                 console.log(result);
-//             }
-//         });
-//         return {
-//             statusCode: 201, 
-//             data: { message: "Sucessfully created new  Order Header!"  },
-//           };
-//     }
-//     catch(err){
-//         console.error("Error in Crating New Order Header in orderHeaderById : " , err);
-//     }
-// };

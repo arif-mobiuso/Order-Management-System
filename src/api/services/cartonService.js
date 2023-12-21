@@ -1,28 +1,5 @@
-import { resolve } from "path";
 import db from "../../config/databaseConfig.js";
-import { rejects } from "assert";
-import { error } from "console";
 
-// export const getCartonDetails = () =>{
-//     try{
-//         const fetchCartonsQuery = `select * from carton` ; 
-//         db.query(fetchCartonsQuery , function(err , result){
-//             if(err){
-//                 console.log("Error in fetchCartonsQuery !");
-//             }
-//             else{
-//                  console.log(result); 
-//             }
-//         });
-//         return {
-//             statusCode: 200, 
-//             data: { message: "Successfully fetched carton details"},
-//           };
-//     }
-//     catch(err){
-//         console.error("Error in getCartonDetails:", err);
-//     }
-// } ; 
 
 
 export const getCartonDetails = () => {
@@ -66,12 +43,12 @@ export const getCartonById = async(cartonId) => {
                 else {
                     console.log(result);
                     if (result.length == 0) {
-                        resolve ({statusCode : 404 , data:{message : "Carton not found !"}});
+                        resolve ({statusCode : 404 , status:{message : "Carton not found !"}});
                     }
                     else {
                         resolve({
                             statusCode: 200,
-                            data: {
+                            status: {
                                 message: `Sucessfully fetched carton Details with cartonId ${cartonId} ! `,
                                 result: result,
                             },
@@ -100,13 +77,13 @@ export const deleteCartonById = (cartonId) => {
                         if(result.affectedRows == 0){
                             resolve({
                                 statusCode:404 , 
-                                data : {message: "Carton not found - cannot delete !"}
+                                status : {message: "Carton not found - cannot delete !"}
                             });
                         }
                         else{
                             resolve({
                                 statusCode: 200,
-                                data: {
+                                status: {
                                     message: `Sucessfully deleted  carton  with cartonId ${cartonId} ! `,
                                     result: result,
                                 },
@@ -135,7 +112,7 @@ export const newCarton = (cartonDetails) =>{
                     console.log(result);
                     resolve({
                         statusCode : 201 , 
-                        data : {message : "New carton created" , result : result}
+                        status : {message : "New carton created" , result : result}
                     });
                 }
             });
