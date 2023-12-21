@@ -1,7 +1,5 @@
-import { error } from "console";
 import db from "../../config/databaseConfig.js" ; 
-import { resolve } from "path";
-
+import { transformOrderHeaderDetails , transformOrderItemsDetails} from "../helpers/utilities.js";
 
 // to add  header details to place order in order_header table  
 
@@ -104,7 +102,7 @@ export const orderHeaderById = (customerId) =>{
                         resolve({
                             statusCode : 200 , 
                             status : { message : "Sucessfully fetched Order Header details !" , 
-                            result : result}
+                            result : result.map(transformOrderHeaderDetails)}
                         });
                     }
                 }
@@ -137,7 +135,7 @@ export const orderItemsById = (customerId) =>{
                         resolve({
                             statusCode : 200 , 
                             status : { message : "Sucessfully fetched Order Items details !" , 
-                            result : result}
+                            result : result.map(transformOrderItemsDetails)}
                         });
                     }
                 }

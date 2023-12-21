@@ -21,11 +21,27 @@ export const transformAddressDetails = (address) => {
   };
 };
 
-export const transformOrderDetails = (order) => {
+export const transformOrderHeaderDetails = (order) => {
   return {
-
+    orderId: order.ORDER_ID,
+    customerId: order.CUSTOMER_ID,
+    orderDate: order.ORDER_DATE,
+    status: order.ORDER_STATUS,
+    paymentMode: order.PAYMENT_MODE,
+    paymentDate: order.PAYMENT_DATE,
+    shipmentDate: order.ORDER_SHIPMENT_DATE,
+    shipperId: order.SHIPPER_ID
   };
 };
+
+export const transformOrderItemsDetails = (order) => {
+  return {
+    orderId : order.ORDER_ID , 
+    productId : order.PRODUCT_ID , 
+    Quantity  : order.PRODUCT_QUANTITY
+  };
+};
+
 export const transformCustomerDetails = (customer) => {
   return {
     customerId: customer.CUSTOMER_ID,
