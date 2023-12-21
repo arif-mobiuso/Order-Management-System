@@ -1,4 +1,3 @@
-import { error } from "console";
 import db from "../../config/databaseConfig.js" ; 
 import * as addressService  from "./addressService.js";
 
@@ -62,10 +61,10 @@ export const getCustomerDetails = () =>{
 };
 
 
-export const getCustomerById =(customer_id) =>{
+export const getCustomerById =(customerId) =>{
     return new Promise(async(resolve , reject)=>{
         try{
-            const fetchCustomerByIdQuery = `select * from online_customer where customer_id = ${customer_id}`; 
+            const fetchCustomerByIdQuery = `select * from online_customer where customer_id = ${customerId}`; 
             db.query(fetchCustomerByIdQuery , function(error , result){
                 if(error){
                     console.log("Error in fetchCustomerByIdQuery !" , error);
@@ -78,7 +77,7 @@ export const getCustomerById =(customer_id) =>{
                     } else{
                         resolve({
                             statusCode: 200, 
-                            data: { message:  `Sucessfully fetched customer Details with customer_id ${customer_id} ! ` , 
+                            data: { message:  `Sucessfully fetched customer Details with customerId ${customerId} ! ` , 
                             result : result}
                         }); 
                     }
@@ -93,10 +92,10 @@ export const getCustomerById =(customer_id) =>{
 };
 
 
-export const deleteCustomerByID = (customer_id) => {
+export const deleteCustomerById = (customerId) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const deleteCustomerByIdQuery = `delete from online_customer where customer_id = ${customer_id}`;
+            const deleteCustomerByIdQuery = `delete from online_customer where customer_id = ${customerId}`;
             db.query(deleteCustomerByIdQuery, async function (err, result) {
                 if (err) {
                     console.log("Error in deleteCustomerByIdQuery", err);
@@ -113,8 +112,7 @@ export const deleteCustomerByID = (customer_id) => {
                             resolve({
                                 statusCode: 200,
                                 data: {
-                                    message: `Sucessfully deleted  Customer  with customer_id ${customer_id} ! `,
-                                    result: result,
+                                    message: `Sucessfully deleted  Customer  with customerId ${customerId} ! `,
                                 },
                             });
                         }
@@ -122,16 +120,16 @@ export const deleteCustomerByID = (customer_id) => {
             });
         }
         catch (err) {
-            console.error("Error in deleteCustomerByID :", err);
+            console.error("Error in deleteCustomerById :", err);
             reject(err);
         }
     });
 };
 
 
-// export const orderHeaderById = (orderDetails , customer_id)=>{
+// export const orderHeaderById = (orderDetails , customerId)=>{
 //     try{
-//         const addHeaderByIdQuery = `insert into order_header (CUSTOMER_ID , ORDER_DATE , ORDER_STATUS , PAYMENT_MODE , PAYMENT_DATE , ORDER_SHIPMENT_DATE , SHIPPER_ID) values (${customer_id} ,${orderDetails.ORDER_DATE} ,"${orderDetails.ORDER_STATUS}" ,"${orderDetails.PAYMENT_MODE}" ,${orderDetails.PAYMENT_DATE} ,${orderDetails.ORDER_SHIPMENT_DATE} ,${orderDetails.SHIPPER_ID}) ;  ` ; 
+//         const addHeaderByIdQuery = `insert into order_header (CUSTOMERId , ORDER_DATE , ORDER_STATUS , PAYMENT_MODE , PAYMENT_DATE , ORDER_SHIPMENT_DATE , SHIPPER_Id) values (${customerId} ,${orderDetails.ORDER_DATE} ,"${orderDetails.ORDER_STATUS}" ,"${orderDetails.PAYMENT_MODE}" ,${orderDetails.PAYMENT_DATE} ,${orderDetails.ORDER_SHIPMENT_DATE} ,${orderDetails.SHIPPER_Id}) ;  ` ; 
 //         db.query(addHeaderByIdQuery , function(err , result){
 //             if(err){
 //                 console.log("Error in creating addHeaderByIdQuery");
