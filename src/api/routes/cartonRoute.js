@@ -8,8 +8,8 @@ import { validation } from "../middlewares/validationMiddleware.js";
 import cartonSchema from "../validations/cartonValidation.js";
 
 router.get('/' , cartonController.getAllCartons) ; 
-router.get('/:carton_id' , cartonController.getCartonDetailsByID) ; 
+router.get('/:id' , cartonController.getCartonDetailsById) ; 
 router.post('/' , validation(cartonSchema) , cartonController.addNewCarton);
-router.delete('/:carton_id' , cartonController.removeCartonByID)
+router.delete('/:id' , cartonController.removeCartonById)
 
 export default router ; 

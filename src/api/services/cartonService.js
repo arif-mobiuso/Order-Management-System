@@ -54,10 +54,10 @@ export const getCartonDetails = () => {
 
 
 
-export const getCartonByID = async(carton_id) => {
+export const getCartonById = async(cartonId) => {
     return new Promise(async(resolve, reject) => {
         try {
-            const fetchCartonByIdQuery = `select * from carton where carton_id = ${carton_id}`;
+            const fetchCartonByIdQuery = `select * from carton where cartonId = ${cartonId}`;
             db.query(fetchCartonByIdQuery, function (err, result) {
                 if (err) {
                     console.log("Error in fetchCartonByIdQuery", err);
@@ -72,7 +72,7 @@ export const getCartonByID = async(carton_id) => {
                         resolve({
                             statusCode: 200,
                             data: {
-                                message: `Sucessfully fetched carton Details with carton_id ${carton_id} ! `,
+                                message: `Sucessfully fetched carton Details with cartonId ${cartonId} ! `,
                                 result: result,
                             },
                         });
@@ -81,19 +81,19 @@ export const getCartonByID = async(carton_id) => {
             });
         }
         catch (err) {
-            console.error("Error in getCartonByID :", err);
+            console.error("Error in getCartonById :", err);
             reject(err);
         }
     });
 };
 
-export const deleteCartonByID = (carton_id) => {
+export const deleteCartonById = (cartonId) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const deleteCartonByIDQuery = `delete from carton where carton_id = ${carton_id}`;
-            db.query(deleteCartonByIDQuery, async function (err, result) {
+            const deleteCartonByIdQuery = `delete from carton where cartonId = ${cartonId}`;
+            db.query(deleteCartonByIdQuery, async function (err, result) {
                 if (err) {
-                    console.log("Error in deleteCartonByIDQuery", err);
+                    console.log("Error in deleteCartonByIdQuery", err);
                     reject(err);
                 }
                 else {
@@ -107,7 +107,7 @@ export const deleteCartonByID = (carton_id) => {
                             resolve({
                                 statusCode: 200,
                                 data: {
-                                    message: `Sucessfully deleted  carton  with carton_id ${carton_id} ! `,
+                                    message: `Sucessfully deleted  carton  with cartonId ${cartonId} ! `,
                                     result: result,
                                 },
                             });
@@ -125,7 +125,7 @@ export const deleteCartonByID = (carton_id) => {
 export const newCarton = (cartonDetails) =>{
     return new Promise(async(resolve , reject) =>{
         try{
-            const newCartonQuery = `insert into carton (carton_id , len , width , height) values (${cartonDetails.cartonId} , ${cartonDetails.length} , ${cartonDetails.width} , ${cartonDetails.height})`;
+            const newCartonQuery = `insert into carton (cartonId , len , width , height) values (${cartonDetails.cartonId} , ${cartonDetails.length} , ${cartonDetails.width} , ${cartonDetails.height})`;
             db.query(newCartonQuery , async function(error , result){
                 if(error){
                     console.log("Error in newCartonQuery : " ,error);

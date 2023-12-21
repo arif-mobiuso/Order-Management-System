@@ -13,11 +13,11 @@ export const getAllCartons = async (req, res) => {
      }
 };
 
-export const getCartonDetailsByID = async (req, res) => {
+export const getCartonDetailsById = async (req, res) => {
      try {
-          const carton_id = req.params.carton_id;
-          const getCartonStatusByID = await cartonService.getCartonByID(carton_id);
-          return res.status(getCartonStatusByID.statusCode).send(getCartonStatusByID.data);
+          const cartonId = req.params.id;
+          const getCartonStatusById = await cartonService.getCartonById(cartonId);
+          return res.status(getCartonStatusById.statusCode).send(getCartonStatusById.data);
      }
      catch (error) {
           console.error("Error in getCartonDetailsByID:", error);
@@ -26,11 +26,11 @@ export const getCartonDetailsByID = async (req, res) => {
 }
 
 
-export const removeCartonByID = async (req, res) => {
+export const removeCartonById = async (req, res) => {
      try {
-          const carton_id = req.params.carton_id;
-          const removeCartonByIDStatus = await cartonService.deleteCartonByID(carton_id);
-          return res.status(removeCartonByIDStatus.statusCode).send(removeCartonByIDStatus.data);
+          const cartonId = req.params.id;
+          const removeCartonByIdStatus = await cartonService.deleteCartonById(cartonId);
+          return res.status(removeCartonByIdStatus.statusCode).send(removeCartonByIdStatus.data);
      }
      catch (error) {
           console.error("Error in removeCartonByID:", error);
