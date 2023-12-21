@@ -8,11 +8,11 @@ import addressRoute from "./api/routes/addressRoute.js"
 //  creating express server 
 const app = express() ; 
 const PORT = 4242 ;
-
-export const  baseURL ="/api/v1" ; 
-
 app.use(express.json()) ; 
 
+
+
+export const  baseURL ="/api/v1" ; 
 // Routes
 app.use(`${baseURL}/cartons`, cartonRoute) ; 
 app.use(`${baseURL}/customers`, customerRoute) ; 

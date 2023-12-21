@@ -16,8 +16,8 @@ export const getAllAddresses = async (req, res)=>{
 
 export const getAddressById = async (req, res)=>{
     try{
-        const address_id = req.params.address_id ;
-        const getAddressByIdStatus = await addressService.getAddressDetailsById(address_id);
+        const addressId = req.params.id ;
+        const getAddressByIdStatus = await addressService.getAddressDetailsById(addressId);
         return res.status(getAddressByIdStatus.statusCode).send(getAddressByIdStatus.data);
     }
     catch(error){

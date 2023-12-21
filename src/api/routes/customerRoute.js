@@ -7,7 +7,6 @@ import * as customerController from "../controllers/customerController.js" ;
 import { validation } from "../middlewares/validationMiddleware.js";
 import customerSchema from "../validations/customerValidation.js";
 import placeOrderSchema from "../validations/placeOrderValidation.js";
-import e from "express";
 
 // get 
 router.get('/' , customerController.getAllCustomers) ; 

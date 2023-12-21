@@ -55,10 +55,11 @@ export const getAddressDetails = async () => {
     });
 };
 
-export const getAddressDetailsById = async (address_id) => {
+
+export const getAddressDetailsById = async (addressId) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const getAddressDetailsByIdQuery = `select * from address where address_id = ${address_id}`;
+            const getAddressDetailsByIdQuery = `select * from address where addressId = ${addressId}`;
             db.query(getAddressDetailsByIdQuery, function (error, result) {
                 if (error) {
                     console.log("Error in getAddressDetailsByIdQuery : ", error);
@@ -73,7 +74,7 @@ export const getAddressDetailsById = async (address_id) => {
                         resolve({
                             statusCode: 200,
                             data: {
-                                message: `Sucessfully Fetched Address Details for address_id = ${address_id} !`,
+                                message: `Sucessfully Fetched Address Details for addressId = ${addressId} !`,
                                 result: result
                             }
                         });
