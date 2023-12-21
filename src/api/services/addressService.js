@@ -1,5 +1,5 @@
 import db from "../../config/databaseConfig.js";
-
+import { transformAddressDetails } from "../helpers/utilities.js";
 
 export const addCustomerAddress = async (addressDetails) => {
     return new Promise((resolve, reject) => {
@@ -41,7 +41,7 @@ export const getAddressDetails = async () => {
                         statusCode: 200,
                         status: {
                             message: "Sucessfully Fetched all Address Details !",
-                            result: result
+                            result: result.map(transformAddressDetails)
                         }
                     });
                 }
@@ -58,7 +58,7 @@ export const getAddressDetails = async () => {
 export const getAddressDetailsById = async (addressId) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const getAddressDetailsByIdQuery = `select * from address where addressId = ${addressId}`;
+            const getAddressDetailsByIdQuery = `select * from address where address_id = ${addressId}`;
             db.query(getAddressDetailsByIdQuery, function (error, result) {
                 if (error) {
                     console.log("Error in getAddressDetailsByIdQuery : ", error);
@@ -74,7 +74,7 @@ export const getAddressDetailsById = async (addressId) => {
                             statusCode: 200,
                             status: {
                                 message: `Sucessfully Fetched Address Details for addressId = ${addressId} !`,
-                                result: result
+                                result: result.map(transformAddressDetails)
                             }
                         });
                     }

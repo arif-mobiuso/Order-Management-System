@@ -10,6 +10,13 @@ export const  transformCartonDetails = (carton) => {
 
 export const  transformAddressDetails =(address) =>{
   return{
+      id : address.address_id , 
+      line1 : address.ADDRESS_LINE1 , 
+      line2 : address.ADDRESS_LINE2 , 
+      city : address.CITY , 
+      state : address.STATE , 
+      pincode : address.PINCODE , 
+      country : address.COUNTRY , 
 
   };
 };

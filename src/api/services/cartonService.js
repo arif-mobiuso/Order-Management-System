@@ -84,7 +84,6 @@ export const deleteCartonById = (cartonId) => {
                                 statusCode: 200,
                                 status: {
                                     message: `Sucessfully deleted  carton  with cartonId ${cartonId} ! `,
-                                    result: result,
                                 },
                             });
                         }
@@ -111,7 +110,7 @@ export const newCarton = (cartonDetails) =>{
                     console.log(result);
                     resolve({
                         statusCode : 201 , 
-                        status : {message : "New carton created" , result : result}
+                        status : {message : "New carton created" }
                     });
                 }
             });
