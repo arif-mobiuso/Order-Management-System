@@ -1,10 +1,12 @@
 import db from "../../config/databaseConfig.js";
 
-
+import { genSaltSync , hashSync  , compareSync} from "bcrypt";
 export const newUser = (userDetails) =>{
     return new Promise(async (resolve , reject)=>{
         try{
-            const newUserQuery = `insert into users  (name , email , password) values ("${userDetails.name}" , "${userDetails.email}" , "${userDetails.password}")` ;
+            const salt = genSaltSync(10);
+            userDetails.password = hashSync(userDetails.password  , salt); 
+            const newUserQuery = `insert into users  (name , email , password) values ("${userDetails.userName}" , "${userDetails.email}" , "${userDetails.password}")` ;
             db.query(newUserQuery , function(error , result){
                 if(error){
                     reject(error); 
@@ -12,7 +14,7 @@ export const newUser = (userDetails) =>{
                 else{
                     resolve({
                         statusCode : 201 , 
-                        status : {message : "sucessfully inserted 1 row into users !"}
+                        status : {message : " new user created !"}
                     });
                 }
             });

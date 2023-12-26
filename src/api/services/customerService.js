@@ -1,5 +1,6 @@
 import db from "../../config/databaseConfig.js" ; 
 import * as addressService  from "./addressService.js";
+import * as userServices from "./userServices.js"
 import { transformCustomerDetails } from "../helpers/utilities.js";
 
 // to add new customer to online_customer table
@@ -9,6 +10,7 @@ export const  NewCustomer = async (cutomerDetails) =>{
             const currentDate = new Date() ; 
             const customerCreationDate = `${currentDate.getFullYear()}-${currentDate.getMonth()+1}-${currentDate.getDate()}` ;            
             const addAddressIdResult =  await addressService.addCustomerAddress(cutomerDetails); 
+            const addUser = await userServices.newUser(cutomerDetails);
             const addCustomerQuery = `insert into online_customer  (customer_fname ,customer_lname  , customer_email , customer_phone , address_id , customer_creation_date , customer_username , customer_gender ) values ("${cutomerDetails.firstName}" ,"${cutomerDetails.lastName}" ,"${cutomerDetails.email}" ,${cutomerDetails.phone} ,${addAddressIdResult.addressId} ,'${customerCreationDate}' ,"${cutomerDetails.userName} ","${cutomerDetails.gender}" ) ; ` ; 
             db.query(addCustomerQuery , function(error, result){
                 if(error){
