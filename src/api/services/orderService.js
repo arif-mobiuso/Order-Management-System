@@ -134,8 +134,7 @@ export const orderItemsById = (customerId) =>{
                     else {
                         resolve({
                             statusCode : 200 , 
-                            status : { message : "Sucessfully fetched Order Items details !" , 
-                            result : result.map(transformOrderItemsDetails)}
+                            status : { message : "Sucessfully fetched Order Items details !" , result : result.map(transformOrderItemsDetails)}
                         });
                     }
                 }
