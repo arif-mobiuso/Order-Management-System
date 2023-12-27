@@ -1,6 +1,6 @@
-import db from "../../config/databaseConfig.js";
+import db from "../../../config/databaseConfig.js";
 
-import { transformCartonDetails } from "../helpers/utilities.js"
+import { transformCartonDetails } from "../../helpers/utilities.js"
 
 
 
@@ -26,8 +26,6 @@ export const getCartonDetails = () => {
         }
     });
 };
-
-
 
 export const getCartonById = async (cartonId) => {
     return new Promise(async (resolve, reject) => {

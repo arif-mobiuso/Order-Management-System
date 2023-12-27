@@ -4,9 +4,9 @@ const router = express.Router() ;
 import * as customerController from "../controllers/customerController.js" ;
 
 // validation imports
-import { validation } from "../middlewares/validationMiddleware.js";
-import customerSchema from "../validations/customerValidation.js";
-import placeOrderSchema from "../validations/placeOrderValidation.js";
+import { validation } from "../../middlewares/validationMiddleware.js";
+import customerSchema from "../../validations/customerValidation.js";
+import placeOrderSchema from "../../validations/placeOrderValidation.js";
 
 // get 
 router.get('/' , customerController.getAllCustomers) ; 

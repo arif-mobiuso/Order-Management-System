@@ -4,8 +4,10 @@ const router = express.Router() ;
 
 
 // importing validations
-import { validation } from "../middlewares/validationMiddleware.js";
-import cartonSchema from "../validations/cartonValidation.js";
+// import { validation } from "./../middlewares/validationMiddleware.js";
+import { validation } from "../../middlewares/validationMiddleware.js";
+// import cartonSchema from "../validations/cartonValidation.js";
+import cartonSchema from "../../validations/cartonValidation.js"
 
 router.get('/' , cartonController.getAllCartons) ; 
 router.get('/:id' , cartonController.getCartonDetailsById) ; 

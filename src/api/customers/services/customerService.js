@@ -1,7 +1,7 @@
-import db from "../../config/databaseConfig.js";
-import * as addressService from "./addressService.js";
-import * as userServices from "./userServices.js"
-import { transformCustomerDetails } from "../helpers/utilities.js";
+import db from "../../../config/databaseConfig.js";
+import * as addressService from "../../address/services/addressService.js";
+import * as userServices from "../../users/services/userServices.js"
+import { transformCustomerDetails } from "../../helpers/utilities.js";
 
 // to add new customer to online_customer table
 export const NewCustomer = async (cutomerDetails) => {
@@ -20,8 +20,8 @@ export const NewCustomer = async (cutomerDetails) => {
                 else {
                     console.log(result);
                     resolve({
-                            message: "Sucessfully created new Customer!",
-                            customerId: result.insertId
+                        message: "Sucessfully created new Customer!",
+                        customerId: result.insertId
                     });
                 }
             });
@@ -44,8 +44,8 @@ export const getCustomerDetails = () => {
                 }
                 else {
                     resolve({
-                            message: "Sucessfully  fecthed Customer Details! ",
-                            result: result.map(transformCustomerDetails),
+                        message: "Sucessfully  fecthed Customer Details! ",
+                        result: result.map(transformCustomerDetails),
                     });
                 }
             });
@@ -60,25 +60,23 @@ export const getCustomerDetails = () => {
 
 
 export const getCustomerById = (customerId) => {
-    return new Promise(async (resolve, reject) => {
+    return new Promise((resolve, reject) => {
         try {
             const fetchCustomerByIdQuery = `select * from online_customer where customer_id = ${customerId}`;
             db.query(fetchCustomerByIdQuery, function (error, result) {
                 if (error) {
                     console.log("Error in fetchCustomerByIdQuery !", error);
-                    reject(error);
+                    reject({message : error.message});
                 }
-                else {
-                        resolve({
-                                message: `Sucessfully fetched customer Details with customerId ${customerId} ! `,
-                                result: result.map(transformCustomerDetails)
-                        });
-                }
+                resolve({
+                    message: `Sucessfully fetched customer Details with customerId ${customerId} ! `,
+                    result: result.map(transformCustomerDetails)
+                });
             });
         }
         catch (error) {
             console.error("Error in getCustomerById : ", error);
-            reject(error);
+            reject({message : error.message});
         }
     });
 };
@@ -102,8 +100,8 @@ export const deleteCustomerById = (customerId) => {
                     }
                     else {
                         resolve({
-                                message: `Sucessfully deleted  Customer  with customerId ${customerId} ! `,
-                                result : result 
+                            message: `Sucessfully deleted  Customer  with customerId ${customerId} ! `,
+                            result: result
                         });
                     }
                 }

@@ -31,7 +31,7 @@ export  const login  = async (req, res) => {
         const result = compareSync(userDetails.password , results.password) ;
         if(result){
             results.password = undefined ; 
-            const jsontoken =   jwt.sign({result : results} , process.env.SECRET_KEY );
+            const jsontoken =   jwt.sign({result : results} , process.env.SECRET_KEY  , expiresIn("1h"));
             return res.json({message : "Login successfully " , 
             token : jsontoken});
         }

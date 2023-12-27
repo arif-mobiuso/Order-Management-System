@@ -1,4 +1,4 @@
-import db from "../../config/databaseConfig.js";
+import db from "../../../config/databaseConfig.js";
 
 import { genSaltSync , hashSync  , compareSync} from "bcrypt";
 export const newUser = (userDetails) =>{

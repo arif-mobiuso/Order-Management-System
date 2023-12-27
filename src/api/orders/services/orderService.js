@@ -1,5 +1,5 @@
-import db from "../../config/databaseConfig.js";
-import { transformOrderHeaderDetails, transformOrderItemsDetails } from "../helpers/utilities.js";
+import db from "../../../config/databaseConfig.js";
+import { transformOrderHeaderDetails, transformOrderItemsDetails } from "../../helpers/utilities.js";
 
 // to add  header details to place order in order_header table  
 

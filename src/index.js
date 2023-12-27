@@ -3,11 +3,12 @@ import dotenv from 'dotenv';
 dotenv.config();
 // importing routes
 
-import cartonRoute from "./api/routes/cartonRoute.js" ; 
-import customerRoute from "./api/routes/customerRoute.js" ; 
-import orderRoute from "./api/routes/orderRoute.js" ; 
-import addressRoute from "./api/routes/addressRoute.js"
-import userRoute from "./api/routes/userRoute.js" ;
+ 
+import cartonRoute from "./api/cartons/routes/cartonRoute.js" ; 
+import customerRoute from "./api/customers/routes/customerRoute.js" ; 
+import orderRoute from "./api/orders/routes/orderRoute.js" ; 
+import addressRoute from "./api/address/routes/addressRoute.js"
+import userRoute from "./api/users/routes/userRoute.js" ;
 
 //  creating express server 
 const app = express() ; 
@@ -23,9 +24,6 @@ app.use(`${baseURL}/customers`, customerRoute) ;
 app.use(`${baseURL}/orders`, orderRoute) ; 
 app.use(`${baseURL}/addresses`, addressRoute) ; 
 app.use(`${baseURL}/users`, userRoute) ; 
-
-
-
 
 
 

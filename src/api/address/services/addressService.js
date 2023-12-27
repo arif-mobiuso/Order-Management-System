@@ -1,5 +1,5 @@
-import db from "../../config/databaseConfig.js";
-import { transformAddressDetails } from "../helpers/utilities.js";
+import db from "../../../config/databaseConfig.js";
+import { transformAddressDetails } from "../../helpers/utilities.js";
 
 export const addCustomerAddress = async (addressDetails) => {
     return new Promise((resolve, reject) => {

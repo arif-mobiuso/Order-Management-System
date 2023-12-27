@@ -4,13 +4,13 @@ import * as orderController  from "../controllers/orderController.js" ;
 const router = express.Router() ; 
 
 // Validation imports
-import { validation } from "../middlewares/validationMiddleware.js";
+import { validation } from "../../middlewares/validationMiddleware.js";
 // import orderHeaderSchema from "../validations/placeOrderValidation.js"
-import orderItemsSchema from "../validations/orderItemsValidation.js";
+import orderItemsSchema from "../../validations/orderItemsValidation.js";
 
 
-// creating an order header
-router.post('/headers',   orderController.addNewHeader) ; 
+
+
 // add order_items in a particular order
 
 
