@@ -1,94 +1,86 @@
-import db from "../../config/databaseConfig.js" ; 
-import * as addressService  from "./addressService.js";
+import db from "../../config/databaseConfig.js";
+import * as addressService from "./addressService.js";
 import * as userServices from "./userServices.js"
 import { transformCustomerDetails } from "../helpers/utilities.js";
 
 // to add new customer to online_customer table
-export const  NewCustomer = async (cutomerDetails) =>{
-    return new Promise(async (resolve , reject)=>{
-        try{
-            const currentDate = new Date() ; 
-            const customerCreationDate = `${currentDate.getFullYear()}-${currentDate.getMonth()+1}-${currentDate.getDate()}` ;            
-            const addAddressIdResult =  await addressService.addCustomerAddress(cutomerDetails); 
+export const NewCustomer = async (cutomerDetails) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const currentDate = new Date();
+            const customerCreationDate = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
+            const addAddressIdResult = await addressService.addCustomerAddress(cutomerDetails);
             const addUser = await userServices.newUser(cutomerDetails);
-            const addCustomerQuery = `insert into online_customer  (customer_fname ,customer_lname  , customer_email , customer_phone , address_id , customer_creation_date , customer_username , customer_gender ) values ("${cutomerDetails.firstName}" ,"${cutomerDetails.lastName}" ,"${cutomerDetails.email}" ,${cutomerDetails.phone} ,${addAddressIdResult.addressId} ,'${customerCreationDate}' ,"${cutomerDetails.userName} ","${cutomerDetails.gender}" ) ; ` ; 
-            db.query(addCustomerQuery , function(error, result){
-                if(error){
-                    console.log("Error in creating addCustomerQuery" , error);
-                    reject(error) ;
-            }
-            else{
-                console.log(result);
-                resolve({
-                    statusCode: 201, 
-                    status: { message: "Sucessfully created new Customer!" ,
-                            customerId : result.insertId} 
-                });
-            }
-        });
-        }
-    catch(error){
-        console.error("Error in Creating New Cutomer : " ,error);
-    }
-}) ;
-};
-
-// To fetch all customer details from online_customer table 
-export const getCustomerDetails = () =>{
-    return new Promise(async(resolve , reject) =>{
-        try{ 
-            const getAllCustomersQuery = `select * from online_customer` ; 
-            db.query(getAllCustomersQuery , function(error , result){
-                if(error){
-                    console.log("Error in getAllCustomersQuery" , error); 
-                    reject(error);  
+            const addCustomerQuery = `insert into online_customer  (customer_fname ,customer_lname  , customer_email , customer_phone , address_id , customer_creation_date , customer_username , customer_gender ) values ("${cutomerDetails.firstName}" ,"${cutomerDetails.lastName}" ,"${cutomerDetails.email}" ,${cutomerDetails.phone} ,${addAddressIdResult.addressId} ,'${customerCreationDate}' ,"${cutomerDetails.userName} ","${cutomerDetails.gender}" ) ; `;
+            db.query(addCustomerQuery, function (error, result) {
+                if (error) {
+                    console.log("Error in creating addCustomerQuery", error);
+                    reject(error);
                 }
-                else{
+                else {
+                    console.log(result);
                     resolve({
-                        statusCode:200 , 
-                        status : {
-                            message:"Sucessfully  fecthed Customer Details! " ,
-                            result:result.map(transformCustomerDetails) , 
-                        }
+                            message: "Sucessfully created new Customer!",
+                            customerId: result.insertId
                     });
                 }
             });
         }
-    catch(error){
-        console.error("Error in getCustomerDetails : " , error);
-        reject(error);
-    }
-});
+        catch (error) {
+            console.error("Error in Creating New Cutomer : ", error);
+        }
+    });
+};
+
+// To fetch all customer details from online_customer table 
+export const getCustomerDetails = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const getAllCustomersQuery = `select * from online_customer`;
+            db.query(getAllCustomersQuery, function (error, result) {
+                if (error) {
+                    console.log("Error in getAllCustomersQuery", error);
+                    reject(error);
+                }
+                else {
+                    resolve({
+                            message: "Sucessfully  fecthed Customer Details! ",
+                            result: result.map(transformCustomerDetails),
+                    });
+                }
+            });
+        }
+        catch (error) {
+            console.error("Error in getCustomerDetails : ", error);
+            reject(error);
+        }
+    });
 };
 
 
-export const getCustomerById =(customerId) =>{
-    return new Promise(async(resolve , reject)=>{
-        try{
-            const fetchCustomerByIdQuery = `select * from online_customer where customer_id = ${customerId}`; 
-            db.query(fetchCustomerByIdQuery , function(error , result){
-                if(error){
-                    console.log("Error in fetchCustomerByIdQuery !" , error);
+
+export const getCustomerById = (customerId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const fetchCustomerByIdQuery = `select * from online_customer where customer_id = ${customerId}`;
+            db.query(fetchCustomerByIdQuery, function (error, result) {
+                if (error) {
+                    console.log("Error in fetchCustomerByIdQuery !", error);
                     reject(error);
                 }
-                else{
-                    if(result.length == 0){
-                        resolve ({statusCode : 404 , status:{message : "Customer not found !"}});
-                    } else{
+                else {
                         resolve({
-                            statusCode: 200, 
-                            status: { message:  `Sucessfully fetched customer Details with customerId ${customerId} ! ` , 
-                            result : result.map(transformCustomerDetails)}
-                        }); 
-                    }
-            }
-        });
-    }
-    catch(error){
-        console.error("Error in getCustomerById : " , error);
-        reject(error);
-    }
-});
+                                message: `Sucessfully fetched customer Details with customerId ${customerId} ! `,
+                                result: result.map(transformCustomerDetails)
+                        });
+                }
+            });
+        }
+        catch (error) {
+            console.error("Error in getCustomerById : ", error);
+            reject(error);
+        }
+    });
 };
 
 
@@ -102,20 +94,18 @@ export const deleteCustomerById = (customerId) => {
                     reject(err);
                 }
                 else {
-                        if(result.affectedRows == 0){
-                            resolve({
-                                statusCode:404 , 
-                                status : {message: "Customer not found - cannot delete !"}
-                            });
-                        }
-                        else{
-                            resolve({
-                                statusCode: 200,
-                                status: {
-                                    message: `Sucessfully deleted  Customer  with customerId ${customerId} ! `,
-                                },
-                            });
-                        }
+                    if (result.affectedRows == 0) {
+                        resolve({
+                            statusCode: 404,
+                            status: { message: "Customer not found - cannot delete !" }
+                        });
+                    }
+                    else {
+                        resolve({
+                                message: `Sucessfully deleted  Customer  with customerId ${customerId} ! `,
+                                result : result 
+                        });
+                    }
                 }
             });
         }

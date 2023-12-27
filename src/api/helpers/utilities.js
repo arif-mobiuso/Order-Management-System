@@ -8,6 +8,7 @@ export const transformCartonDetails = (carton) => {
   };
 };
 
+
 export const transformAddressDetails = (address) => {
   return {
     id: address.address_id,
@@ -26,11 +27,11 @@ export const transformOrderHeaderDetails = (order) => {
     orderId: order.ORDER_ID,
     customerId: order.CUSTOMER_ID,
     orderDate: order.ORDER_DATE,
-    status: order.ORDER_STATUS,
+    // status: order.ORDER_STATUS,
     paymentMode: order.PAYMENT_MODE,
-    paymentDate: order.PAYMENT_DATE,
-    shipmentDate: order.ORDER_SHIPMENT_DATE,
-    shipperId: order.SHIPPER_ID
+    // paymentDate: order.PAYMENT_DATE,
+    // shipmentDate: order.ORDER_SHIPMENT_DATE,
+    // shipperId: order.SHIPPER_ID
   };
 };
 

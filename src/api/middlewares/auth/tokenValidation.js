@@ -2,8 +2,9 @@ import pkg from 'jsonwebtoken';
 const { verify } = pkg;
 
 
-export const checkToken = (req,res , next) =>{
 
+
+export const checkToken = (req,res , next) =>{
     let token = req.get("authorization");
     if(token){
         token = token.slice(7);
@@ -20,3 +21,6 @@ export const checkToken = (req,res , next) =>{
         return res.status(403).json({message : "Access denied unauthorized user !"});
     }
 };
+
+
+

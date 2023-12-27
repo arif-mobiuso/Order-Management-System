@@ -14,8 +14,7 @@ export const addCustomerAddress = async (addressDetails) => {
                 else {
                     console.log(result);
                     resolve({
-                        addressId: result.insertId
-                    });
+                        addressId: result.insertId  });
                 }
             });
         }
@@ -38,11 +37,8 @@ export const getAddressDetails = async () => {
                 else {
                     console.log(result);
                     resolve({
-                        statusCode: 200,
-                        status: {
                             message: "Sucessfully Fetched all Address Details !",
-                            result: result.map(transformAddressDetails)
-                        }
+                             result: result.map(transformAddressDetails)
                     });
                 }
             });
@@ -70,12 +66,9 @@ export const getAddressDetailsById = async (addressId) => {
                         resolve({ statusCode: 404, status: { message: "Address not found !" } });
                     }
                     else {
-                        resolve({
-                            statusCode: 200,
-                            status: {
+                        resolve({                            
                                 message: `Sucessfully Fetched Address Details for addressId = ${addressId} !`,
                                 result: result.map(transformAddressDetails)
-                            }
                         });
                     }
                 }
