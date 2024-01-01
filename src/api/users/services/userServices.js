@@ -1,12 +1,13 @@
+import { error } from "console";
 import db from "../../../config/databaseConfig.js";
 
 import { genSaltSync , hashSync  , compareSync} from "bcrypt";
-export const newUser = (userDetails) =>{
+export const newUser = (userDetails , customerId) =>{
     return new Promise(async (resolve , reject)=>{
         try{
             const salt = genSaltSync(10);
             userDetails.password = hashSync(userDetails.password  , salt); 
-            const newUserQuery = `insert into users  (name , email , password) values ("${userDetails.userName}" , "${userDetails.email}" , "${userDetails.password}")` ;
+            const newUserQuery = `insert into users  ( CUSTOMER_ID, name , email , password) values (  ${customerId} , "${userDetails.userName}" , "${userDetails.email}" , "${userDetails.password}")` ;
             db.query(newUserQuery , function(error , result){
                 if(error){
                     reject(error); 
@@ -64,10 +65,32 @@ export const getUserByEmail = (email) =>{
                 }
                 else{
                     resolve({
-                        statusCode : 200 , 
-                        status : {message : `sucessfully  fetched user details with email : "${email}" !` , result : result}
+                        message : `sucessfully  fetched user details with email : "${email}" !` ,
+                        result : result
                     });
                 }
+            });
+
+        }
+        catch(error){
+            reject({message : error.message});
+        }
+    }) ;
+} ;
+
+
+
+export const deleteUser = (customerId) =>{
+    return new Promise(async (resolve , reject)=>{
+        try{
+            const deleteUserQuery = `delete from users where CUSTOMER_ID = ${customerId}` ;
+            db.query(deleteUserQuery , function(error , result){
+                if(error){
+                    reject({ error}); 
+                }
+                return resolve({
+                    message : "deleted user successfully"  
+                })
             });
 
         }
@@ -77,3 +100,5 @@ export const getUserByEmail = (email) =>{
         }
     }) ;
 } ;
+
+

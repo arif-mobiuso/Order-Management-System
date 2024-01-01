@@ -4,6 +4,8 @@ import * as customerService from "../services/customerService.js" ;
 import * as orderService from "../../orders/services/orderService.js" ;
 
 
+
+
 export const addNewCustomer =  async (req, res)  => {
     try{
     const cutomerDetails = req.body ; 
@@ -12,9 +14,11 @@ export const addNewCustomer =  async (req, res)  => {
      }
      catch(error){
           console.error("Error in addNewCustomer:", error);
-          return res.status(500).send({ message: "Internal Server Error" });
+          return res.status(500).send({ message: error.message});
      }
 };
+
+
 
 export const getAllCustomers = async (req , res) =>{
     try{
@@ -22,7 +26,6 @@ export const getAllCustomers = async (req , res) =>{
        return res.status(200).send({message : customer.message , result : customer.result});
      }
      catch(error){
-          console.error("Error in getAllCustomers:", error);
           return res.status(500).send({ message: "Internal  Server Error " + error.message });
      }
        
@@ -39,14 +42,12 @@ export const getCustomerDetailsById = async(req , res)=>{
     return res.status(200).send({message : customer.message , result : customer.result});
      }
      catch(error){
-          console.error("Error in getCustomerDetailsById:", error);
-          return res.status(500).send({ message: "Internal Server Error" });
+          return res.status(500).send({ message: error.message });
      }
 };
 
 export const placeOrderById = async (req, res) =>{
      try{
-
           const customerId =  req.params.id ; 
           const orderDetails = req.body ; 
           const customer = await orderService.placeOrder(orderDetails , customerId) ;
@@ -65,7 +66,7 @@ export const removeCustomerById = async (req, res) => {
           const customerId = req.params.id;
           const customer = await customerService.deleteCustomerById(customerId);
          if(customer.result.affectedRows == 0){
-          return removeCustomerById.status(404).send({message : "Customer not found - cannot delete !"})
+          return res.status(404).send({message : "Customer not found - cannot delete !"})
          }
           return res.status(200).send({message : customer.message  });
      }
@@ -73,5 +74,23 @@ export const removeCustomerById = async (req, res) => {
           console.error("Error in removeCustomerById:", error);
           return res.status(500).send({ message: "Internal Server Error" });
      }
-}
+} ;
+
+
+
+export const updateCustomerById = async (req, res) => {
+     try {
+         const customerId = req.params.id ; 
+     //     console.log(customerId);
+         const customerDetails = req.body
+     //     console.log(customerDetails);
+ 
+         const updatedCustomer = await customerService.updateCustomer(customerId, customerDetails)
+ 
+         return res.status(200).send({ message: updatedCustomer.message })
+     } catch (error) {
+          return res.status(500).send({ message: "Internal Server Error 89" });
+     }
+ }
+ 
 

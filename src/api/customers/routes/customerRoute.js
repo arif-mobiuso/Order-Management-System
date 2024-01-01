@@ -21,5 +21,8 @@ router.post('/:id/orders',validation(placeOrderSchema) ,customerController.place
 router.delete('/:id' ,customerController.removeCustomerById);
 
 
+
+router.put('/:id' , customerController.updateCustomerById) ; 
+
 export default router ; 
 
