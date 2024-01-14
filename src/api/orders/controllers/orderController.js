@@ -53,3 +53,13 @@ export const getOrderItemsById = async(req, res) =>{
 }
 
 
+export const newOrder = async(req, res)=>{
+    try{
+        const orderDetails = req.body ;
+        const cutomerId  = req.params.id ; 
+        const order = await orderService.newOrderService(orderDetails , cutomerId  );
+        res.status(201).send({message : order.message , orderId : order.orderId}); 
+    }catch(error){
+        res.status(500).send({message : error.message})       
+    }
+}

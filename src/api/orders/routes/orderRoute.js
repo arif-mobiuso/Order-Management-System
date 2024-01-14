@@ -20,6 +20,10 @@ router.get('/:id/items', orderController.getOrderItemsById) ;
 router.post('/:id/items' , validation(orderItemsSchema) , orderController.addNewItemsById) ; 
 
 
+// add order header 
+router.post("/:id", orderController.newOrder);
+
+
 
 export default router ; 
 

@@ -1,5 +1,5 @@
-import db from "../../../config/databaseConfig.js";
-import { transformOrderHeaderDetails, transformOrderItemsDetails } from "../../helpers/utilities.js";
+import db from "../../config/databaseConfig.js";
+import { transformOrderHeaderDetails, transformOrderItemsDetails } from "../helpers/utilities.js";
 
 // to add  header details to place order in order_header table  
 
@@ -78,33 +78,6 @@ export const placeOrder = (orderDetails, customerId) => {
         }
     });
 };
-
-export const newOrderService = (orderDetails, customerId) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            const currentDate = new Date();
-            const orderDate = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
-            const addHeaderQuery = `insert into order_header (CUSTOMER_ID , ORDER_DATE , PAYMENT_MODE ) values (${customerId} ,"${orderDate} ", "${orderDetails.paymentMode}") ;  `;
-            db.query(addHeaderQuery, function (error, result) {
-                if (error) {
-                    reject(error);
-                }
-                else {
-                    console.log(result);
-                    resolve({
-                        message: "New Order Created !",
-                        orderId: result.insertId
-                    });
-                }
-            });
-        }
-        catch (error) {
-            console.log("Error in placing order : ", error);
-            reject(error);
-        }
-    });
-};
-
 
 
 export const orderHeaderById = (customerId) => {
